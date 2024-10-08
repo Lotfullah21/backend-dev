@@ -1,0 +1,36 @@
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.env
+*.DS_Store
+
+# Virtual environment
+env/
+venv/
+ENV/
+venv.bak/
+
+# Django specific
+*.log
+*.pot
+*.pyc
+*.mo
+*.swp
+db.sqlite3
+db.sqlite3-journal
+
+# Ignore media and static files if they are generated
+/media/*
+/static/*
+
+# Migrations (optional, you may want to include these)
+**/migrations/*
+
+# Ignore node_modules (if you're using JavaScript/React, etc.)
+node_modules/
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
