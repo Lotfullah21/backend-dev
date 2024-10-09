@@ -89,45 +89,13 @@ Let's take a closer look at each of these files and directories.
 7. views.py
    The views.py file contains the view functions or classes that handle HTTP requests and return HTTP responses. Views are the heart of a Django app and define the logic for rendering templates, processing form submissions, and interacting with models.
 
+## app
+
+an app is a self-contained module that encapsulates a specific piece of functionality or a related set of features within a larger project. Each app is designed to do one thing and do it well, making it easier to organize and maintain your code. Here are some key points about Django apps:
+
 ## Views
 
 a view is a function designed to handle a web request and return a web response. Each view function takes an HTTP Request object as its first parameter named `request`.
-
-## Routing
-
-Mapping of a url to a view function is called routing.
-We create routing using path method, it takes two parameters, `route` and a view `function` to be mapped to the given view.
-
-## Request-Request Cycle
-
-### Request and Response Objects
-
-Generally, a browser sends the request in the form of a URL. The web application forms a suitable response to the data contained in the request.
-
-Django handles the request and response with the help of HttpRequest and HttpResponse classes in the django.http module.
-
-As a client request is received, Django’s URL dispatcher mechanism invokes a view that matches the URL pattern and passes this HTTPRequest object as the first argument so that all the request metadata is available to the view for processing.
-
-## URL
-
-every single resource on web is located by an address, known as `uniform resource locator`.
-url is an address where files are stored.
-
-`URL parameters`: it is used to capture any part of a url, `google.com/2022/`: here, 2022 is a parameter.
-
-`URL Query Strings`: A query string is a sequence of one or more key=value pairs concatenated by the & symbol. Each key is the query parameter. The query string ends with the ? symbol after the URL endpoint.
-
-The URL dispatcher doesn’t parse these parameters. They are fetched by the view from the request object it receives. The request object’s GET property is a dictionary object.
-
-The key-value pairs in the query string are added to the request.GET property. Hence, the name can be obtained with request.GET[‘name’] expression.
-
-it is similar to parameter and it is placed after `url` path and also it is placed after `?`.
-
-`google.com/?year=2022`: here, year is a query string.
-
-we can more than one query string by adding `&` in between.
-
-`google.com/?year=2022&month="Oct"`
 
 ## 1. Creating URLS
 
@@ -367,4 +335,20 @@ class MyView(View):
     def get(self, request):
         return HttpResponse("Hello, world!")
 
+```
+
+## From Project
+
+Without Quotes `(let secret = {{ secret_number }}`;):
+
+Use this when secret_number is guaranteed to always be an integer.
+It's a direct injection of the number.
+With Quotes and parseInt() (let secret = `parseInt("{{ secret_number }}");)`:
+
+Use this when secret_number might be empty, None, or a string representation of a number.
+It's safer because it ensures the value is converted into a number, or NaN if invalid.
+
+```sh
+# To remove files from staged area
+git rm -r --cached .
 ```

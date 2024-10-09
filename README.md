@@ -9,16 +9,10 @@ virtualenv env
 pip install django
 # check if it is installed
 django-admin
+# go to project dir
 cd projectName
 # to create a model(app) inside our project
 python manage.py startapp  accounts
-# Go to virtual env
-cd env
-# activate virtual env
-source bin/activate
-cd ..
-# run server
-python manage.py runserver
 ```
 
 ## servers
@@ -29,6 +23,18 @@ They are stored in data centers, all of the servers are connected to the interne
 
 Data centers are built based on the service purpose, for instance if it provides more content like images and videos, it will have more hard drive space.
 these devices are called ` hardware` and the piece of code that run on them are known as `software`.
+
+```py
+# Step 1: Activate the virtual environment
+source env/bin/activate
+
+# Step 2: Change to your Django project directory
+cd firstProject
+
+# Step 3: Run the development server
+python manage.py runserver
+
+```
 
 ## web server
 

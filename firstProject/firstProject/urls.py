@@ -16,16 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from home.views import index, about, contact, dynamic_url
-from . import views
+from home.views import index, about, contact, dynamic_url, project
+from django.conf import settings
+from django.conf.urls.static import static
+
+
 
 urlpatterns = [
     path("",index,name="index"),
     path("<id>/<name>/",dynamic_url, name="dynamic_url"),
     path("about/",about,name="about"),
     path("contact/",contact,name="contact"),
+    path("project/", project, name="project"),
     path('admin/', admin.site.urls),
-    ]
+    ] 
 
 
 

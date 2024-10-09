@@ -42,6 +42,8 @@ template engine process django template engine like variables, expressions, and 
 - view function retrieve data from a database
 - we use template and django template language to display the retrieved data.
 
+Django template language uses curly braces ({{ }}) for rendering variables and expressions, and percentage signs ({% %}) for executing template tags and filters.
+
 ## render
 
 render is a function used inside view and it takes three parameters,`render(request, path, context)`.
@@ -117,6 +119,14 @@ Using inheritance, we can use a common block of code inside our templates.
 
 It creates a parent child relationship where parent's functionality can be overwritten.
 
+Base Template: Defines the overall layout structure, including header, footer, navigation, and other common elements.
+
+Child Templates: Extend the base template and provide content specific to individual pages.
+
+Blocks: Designated sections in the base template that child templates can override or fill with custom content.
+
+Context: Data passed from views to templates, accessible within both base and child templates.
+
 We can write a reusable piece of code in one template and use it in other template using inheritance property.
 `./home/base.html`
 
@@ -160,6 +170,10 @@ inside `{%block start%} {% endblock %}`, we will place our dynamic content.
 ## include
 
 Using include, it renders a template in the current context.
+
+In Django templates, the include tag allows you to insert the contents of one template into another, promoting code reuse and modularity.
+
+It's different from inheritance, as it doesn't create a parent-child relationship between templates. Instead, it simply incorporates a specific portion of one template into another.
 
 `./home/image.html`
 
