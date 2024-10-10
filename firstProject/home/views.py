@@ -1,6 +1,6 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.views import View
+from django.shortcuts import render, redirect
+from home.forms import ContactForm
+from home.models import ContactModel
 import random
 # Create your views here.
 
@@ -16,7 +16,20 @@ def about(request):
     return render(request, "about.html")
 
 def contact(request):
-    return render(request, "contact.html")
+
+    if request.method=="POST":
+        # get the info from posted request
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            contact = ContactModel(**form.cleaned_data)
+            contact.save()
+            return redirect("/contact/")
+    form = ContactForm()
+    context = {"form":form}
+    return render(request, "contact.html", context=context)
+
+
 
 def dynamic_url(request, id, name):
     print(f"this is the id=")
