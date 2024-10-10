@@ -66,6 +66,14 @@ new_student.save()
 student1 = Student.object.create(name="ahmad", gender="Male", email="ahmad@gmail.com" ,date_of_birth="1998-02-01")
 ```
 
+Using dict unpacking feature.
+
+```sh
+args = {"name": "ahmad", "gender": "Male", "email": "ahmad@gmail.com", "date_of_birth": "1998-02-01"}
+Student.objects.create(**args)
+
+```
+
 use `CTRL+l` to clear the shell
 
 2. Read
@@ -81,6 +89,34 @@ for s in student:
 male_student = Student.objects.filter(gender="Male")
 for s in male_student:
     print(f"{s.name} {s.date_of_birth} {s.email}")
+
+```
+
+#### get_or_create()
+
+```py
+# Using get_or_create to find or create a student
+student, created = Student.objects.get_or_create(
+    email="ahmad@gmail.com",  # Searching by email
+    defaults={
+        "name": "Ahmad",
+        "gender": "Male",
+        "date_of_birth": "1998-02-01"
+    }
+)
+
+if created:
+    print("A new student was created:", student)
+else:
+    print("Retrieved existing student:", student)
+
+```
+
+if the field is present, get it, if not create it.
+
+```shell
+dep = Department.objects.last()
+dep = Department.objects.first()
 ```
 
 3. Update

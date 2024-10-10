@@ -1,6 +1,12 @@
 ## `Many-To-One` or `One-To-Many`. ForeignKey
 
 a primary key of one table that can be used in another table is known as foreign key.
+ForeignKey represents a many-to-one relationship, where multiple instances of one model (child) can be associated with a single instance of another model (parent). In this case, the Student model contains a ForeignKey field pointing to the Department model, This means:
+
+- Many students can be associated with one department (many-to-one).
+- Each student can be associated with exactly one department.
+- But one department can have multiple students.
+- The on_delete=models.CASCADE argument ensures that if a department is deleted, all students associated with that department are also deleted to maintain referential integrity.
 
 from relationship point of view, it can men `Many-To-One` or `One-To-Many`.
 For instance, if there is a department with a primary key and many students whom are studying in the same department.
@@ -54,6 +60,11 @@ This framework for using foreign keys in Django is essential for modeling real-w
 
 each record in one model corresponds to exactly one record in another model
 all properties are the same, except the fact that here, we can have only one student per one department model.
+
+- Suppose we have, the Student model containing a field named department, which is a OneToOneField pointing to the Department model.
+- This relationship indicates that each student is associated with exactly one department, and conversely, each department has exactly one student.
+- Similar to the ForeignKey relationship, the on_delete=models.CASCADE argument ensures that if a department or a student is deleted, the associated instance will also be deleted to maintain referential integrity.
+
 For instance, an `EEE` department can have only one student.
 the `on_delete` property is the same as `Foreign key`.
 
@@ -115,9 +126,10 @@ students_in_math = course1.students.all()
 ```
 
 Using `.add()` is essential for managing many-to-many relationships in Django
-Use `create()` when you want to quickly create and save a new instance without additional processing.
+Use `create()` when you want to quickly create and save a new instance without additional processing, but it is not capable of updating.
 Use `save()` when you need to perform additional operations on the instance before saving or when updating an existing instance.
 If you are using other models inside other modes, make sure to create other models first, then the one using those models, otherwise, it will create null ids for those.
+We can insert and create an instance to the database using `save()`.
 
 ```py
 from django.db import models
@@ -195,6 +207,8 @@ students = [
         phone_number="2345678901",
         college=college2,  # Assigning a college
         department=department1  # Assigning a department
+
+
     ),
     Student(
         name="John",
@@ -217,7 +231,7 @@ design = Skills.objects.create(skill_name="Design")
 
 for student in students:
     student.skill.add(coding, design)  # Add skills to each student
-print("Students added successfully with colleges and departments.")
+print(f"Students added successfully with colleges and departments.")
 
 ```
 

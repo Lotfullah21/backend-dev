@@ -42,4 +42,5 @@ gender = models.CharField(max_length=10, choices=(("Male", "Male"), ("Female", "
 9. `created_at = models.DateTimeField(auto_now_add=True)`: this will automatically set the field to the current timestamp when the record is first created and will not change afterward. it sets the field only once when the object is created (useful for created_at fields).
 10. `updated_at = models.DateTimeField(auto_now=True)`: this will automatically set the field to the current timestamp and updated when the record changes.
 11. `uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)`: automatically generates a new UUID using Python’s uuid.uuid4() function.
-12.
+
+## slug field
