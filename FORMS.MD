@@ -82,10 +82,222 @@ def contact(request):
     return render(request, "contact.html", context=context)
 ```
 
-`is_valid()` method is called on the ContactForm instance. If the form data is valid (i.e., all required fields are filled out correctly), it proceeds to the next step.
-
-`redirect` is crucial here, otherwise the user will stay on the same page if the page is reloaded, the same data will be submitted to the server.
+`is_valid()`: method is called on the ContactForm instance. If the form data is valid (i.e., all required fields are filled out correctly), it proceeds to the next step.
+`request.Post`: request.POST is a dictionary-like object that contains all the data submitted in a POST request
+`redirect`: is crucial here, otherwise the user will stay on the same page if the page is reloaded, the same data will be submitted to the server.
 
 ### How to store data in our database?
 
-- Create a model matching required fields when form was created.
+Create a model matching required fields when form was created.
+
+### Modal Form
+
+a ModelForm is a special type of form that is directly tied to a model. It allows you to create forms that automatically generate fields based on the model's attributes, making it easier to handle form data and perform validation against the model.
+
+Automatic Field Generation: ModelForms automatically create form fields corresponding to the fields in the associated model.
+
+- create a model
+
+```py
+
+class ContactModel(models.Model):
+    name = models.CharField(max_length=120)
+    age = models.IntegerField()
+    gender = models.CharField(max_length=10)
+    comment = models.CharField(max_length=10000)
+
+    class Meta:
+        db_table="home_contact_form"
+```
+
+- use that model inside the form
+
+```py
+# forms.py
+from django import forms
+from home.models import ContactModel
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = ContactModel
+        fields="__all__"
+```
+
+`class Meta` have three attributes.
+
+- `model`: the model the form is inheriting from
+- `fields`: the fields to be included from model, if we want to use all, use `__all__`, other wise for specific fields add them in array. `fields:["name","email"]`
+- `exclude`: the fields to be exclude, but note that still we will be having that field in our table, it is crucial to set its value in mode `null=True, blank=True`.
+
+```py
+def contact(request):
+
+    if request.method=="POST":
+        # get the info from posted request
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            # be careful to don't use ContactForm here, that is only for getting the data, we are saving the form data through the model.
+            contact = ContactModel(**form.cleaned_data)
+            contact.save()
+            return redirect("/contact/")
+    form = ContactForm()
+    context = {"form":form}
+    return render(request, "contact.html", context=context)
+```
+
+Alternatively, since we are inheriting the model, directly we can use `save` on `ContactForm` as well.
+
+```py
+def contact(request):
+
+    if request.method=="POST":
+        # get the info from posted request
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/contact/")
+    form = ContactForm()
+    context = {"form":form}
+    return render(request, "contact.html", context=context)
+```
+
+```html
+<form action="" method="POST" enctype="multipart/form-data">
+	{%csrf_token%} {{form}}
+	<button type="submit">submit</button>
+</form>
+```
+
+##### enctype Attribute:
+
+The enctype (encoding type) attribute specifies how the form data should be encoded when it is submitted to the server.
+By default, when a form is submitted, the data is encoded as application/x-www-form-urlencoded. However, this encoding is not suitable for file uploads because it cannot handle binary data (like images or other files).
+
+#### multipart/form-data:
+
+This is a specific encoding type used when you want to allow file uploads through your form.
+When a form has the enctype="multipart/form-data" attribute, the browser will send the form data in multiple parts. One part for each field, and if any of the fields contain files, those files are sent as binary data.
+
+# Limitation
+
+- one of the main limitation is that we can't have much customization for django forms
+- user experience is important here
+
+## HTML FORM
+
+`./home/templates/request_product.html`
+
+```html
+{% extends "base.html"%} {%block start%} {%include "navbar.html"%}
+<div>
+	<h1>Submit Your Information</h1>
+	<div>
+		<form method="POST" action="">
+			{% csrf_token %}
+			<div class="mb-4">
+				<label for="name">product name</label>
+				<input type="text" id="name" name="name" required />
+			</div>
+			<div class="mb-4">
+				<label for="quantity">quantity</label>
+				<input id="quantity" type="number" name="quantity" required class="" />
+			</div>
+			<div class="mb-4">
+				<label for="description">description</label>
+				<textarea
+					type="textarea"
+					id="description"
+					name="remarks"
+					rows="4"
+					required
+					class=""></textarea>
+			</div>
+			<button type="submit" class="2">Submit</button>
+		</form>
+	</div>
+</div>
+
+{%endblock%}
+```
+
+`/home/views`
+
+```py
+def request_product(request):
+    # print(request.POST)
+    if request.method =="POST":
+        product_name = request.POST.get("name")
+        remarks = request.POST.get("remarks")
+        quantity = request.POST.get("quantity")
+        product = Product(product_name=product_name,description=remarks, quantity=quantity)
+        product.save()
+        return redirect("/request-product/")
+    return render(request, "request_product.html")
+```
+
+All the data submitted by the user live inside `request.POST`
+
+## message
+
+using message framework,we can send a message back to the user if the action was successful or not.
+
+In Django, the messaging framework is designed to work seamlessly without requiring explicit context variables to be passed to your templates
+
+#### How Django Messages Work
+
+Middleware: The Django messages framework relies on middleware (MessageMiddleware) to handle message storage in the session and make them accessible in templates. This middleware manages the retrieval of messages from the session when a request is made.
+
+Template Context Processors: Django includes a context processor for messages by default. This context processor automatically adds the messages to the template context for every request when you include the django.contrib.messages middleware in your settings.
+
+## validation
+
+```py
+ Validation function
+def isEmptyValue(value):
+    return value is None or value == ""
+
+def request_product(request):
+    if request.method == "POST":
+        product_name = request.POST.get("name")
+        remarks = request.POST.get("remarks")
+        quantity = request.POST.get("quantity")
+        file = request.FILES.get("file")  # Use .get() to avoid KeyError if file is not provided
+
+        # Validation
+        if isEmptyValue(product_name):
+            messages.warning(request, "Product name cannot be null")
+            return redirect("/request-product/")
+
+        if isEmptyValue(remarks):
+            messages.warning(request, "Remarks cannot be null")
+            return redirect("/request-product/")
+
+        if isEmptyValue(quantity):
+            messages.warning(request, "Quantity cannot be null")
+            return redirect("/request-product/")
+
+        try:
+            quantity = int(quantity)
+        except ValueError:
+            messages.warning(request, "Quantity must be a number")
+            return redirect("/request-product/")
+
+        if quantity > 12:
+            messages.warning(request, "Product quantity cannot be more than 12")
+            return redirect("/request-product/")
+
+        if str(file).split(".")[1]!="pdf":
+            messages.warning(request, "file can be only pdf")
+            return redirect("/request-product/")
+
+        # If all validations pass, save the product
+        product = Product(product_name=product_name, description=remarks, quantity=quantity)
+        product.save()
+
+        messages.success(request, "Product submitted successfully!")
+        return redirect("/request-product/")
+
+    return render(request, "request_product.html")  # Ensure to render the form if GET request
+```
+
+`file.name`: The name attribute of the uploaded file object contains the original name of the file as it was uploaded by the user

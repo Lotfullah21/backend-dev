@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from home.views import index, about, contact, dynamic_url, project
+from home.views import index, about, contact, dynamic_url, project, request_product
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -28,6 +28,7 @@ urlpatterns = [
     path("about/",about,name="about"),
     path("contact/",contact,name="contact"),
     path("project/", project, name="project"),
+    path("request-product/",request_product, name="requested_product"),
     path('admin/', admin.site.urls),
     ] 
 

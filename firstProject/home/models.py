@@ -6,14 +6,19 @@ class BaseModel(models.Model):
     field_from_base_model = models.CharField(max_length=102, default="BASE FIELD")
     class Meta:
         abstract = True
-        
     def __str__(self):
         return self.field_from_base_model
 
 
 class Product(BaseModel):
     product_name = models.CharField(max_length=120)
+    description= models.TextField(null=True,blank=True)
+    quantity = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     slug = models.SlugField(blank=True)
+    file = models.FileField(upload_to="files/products")
+
     def save(self, *args, **kwargs):
         self.slug = slugify(f"{self.product_name}")
         super(Product, self).save(*args, **kwargs)
@@ -70,9 +75,12 @@ class Student(BaseModel):
 
 class ContactModel(models.Model):
     name = models.CharField(max_length=120)
-    age = models.IntegerField()
+    email=models.EmailField()
+    age = models.IntegerField(null=True, blank=True)
     gender = models.CharField(max_length=10)
     comment = models.CharField(max_length=10000)
-
-    class Meta:
-        db_table="home_contact_form"
+    gender = models.CharField(max_length=120,choices=(("Male","Male"),("Female","Female")),default="Male")
+    image = models.FileField(upload_to="files",null=True, blank=True)
+    
+    
+    

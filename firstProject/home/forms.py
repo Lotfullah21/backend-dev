@@ -1,8 +1,8 @@
 from django import forms
+from home.models import ContactModel
 
-
-class ContactForm(forms.Form):
-    name = forms.CharField(max_length=120)
-    age = forms.IntegerField()
-    gender = forms.CharField(max_length=10)
-    comment = forms.CharField(max_length=10000)
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = ContactModel
+        fields="__all__"
+        exclude=["age"]
