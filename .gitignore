@@ -12,6 +12,7 @@ venv/
 ENV/
 venv.bak/
 
+
 # Django specific
 *.log
 *.pot
@@ -34,3 +35,5 @@ node_modules/
 # Ignore IDE-specific files
 .vscode/
 .idea/
+
+settings.py
