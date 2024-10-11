@@ -77,15 +77,17 @@ WSGI_APPLICATION = 'firstProject.wsgi.application'
 
 
 
+import os
+
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': "hooshmand",
-       'USER': 'postgres',
-       'PASSWORD': 'edtech',
-       'HOST': 'localhost',
-       'PORT': '5433',
-   }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME', 'hooshmand'),
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'edtech'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5433'),
+    }
 }
 
 # Password validation
