@@ -37,4 +37,4 @@ node_modules/
 .idea/
 
 # Ignore settings.py in the specified directory
-firstProject/firstProject/settings.py
+firstProject/firstProject/*settings.py
