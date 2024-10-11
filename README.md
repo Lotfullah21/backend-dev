@@ -61,6 +61,17 @@ cd firstProject
 # Step 3: Run the development server
 python manage.py runserver
 
+
+
+
+```
+
+‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍```sh
+
+<!-- to stop or remove a file from already committed file to github. -->
+
+git rm -r --cached path/to/media/directory
+
 ```
 
 ## web server
@@ -120,3 +131,4 @@ in frameworks, we are having more freedom.
 ## API
 
 application program interfaces that allows us to interact with an application.
+```
