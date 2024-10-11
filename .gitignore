@@ -36,4 +36,5 @@ node_modules/
 .vscode/
 .idea/
 
-**.settings.py
+# Ignore settings.py in the specified directory
+firstProject/firstProject/settings.py
