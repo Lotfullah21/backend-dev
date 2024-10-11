@@ -64,3 +64,19 @@ For instance, application failure, long time to respond.
 Django handles all error cases by raising an exception which is invoked via an error handler view.
 We can configure it as well.
 A project level `views.py` must be created handling all the errors across the project.
+
+## gitignore
+
+If you only want to ignore SQLite files within a specific app, you can specify the path more explicitly. For example, if you only want to ignore `myapp/database.sqlite3`
+
+`*.sqlite3`: Meaning: This pattern matches any file with the .sqlite3 extension in the current directory only. It does not traverse into subdirectories.
+
+`Matches`: db.sqlite3 (in the root or any specific directory).
+`Does Not Match`: subfolder/db.sqlite3 (inside a subdirectory).
+
+`\*\*/_.sqlite3`: This pattern matches any file with the .sqlite3 extension in the current directory and any subdirectory at any level.
+
+`Matches`:
+db.sqlite3 (in the root directory),
+app1/db.sqlite3 (in the app1 subdirectory),
+app2/subfolder/db.sqlite3 (in a nested subdirectory).

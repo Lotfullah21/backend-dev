@@ -21,10 +21,10 @@ venv.bak/
 *.swp
 db.sqlite3
 db.sqlite3-journal
-
-# Ignore media and static files if they are generated
-/media/*
-/static/*
+**/*.sqlite3
+# Ignore all media and static files in all apps,** wildcard, matches any directory level
+**/media/*
+**/static/*
 
 # Migrations (optional, you may want to include these)
 **/migrations/*
