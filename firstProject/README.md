@@ -1,3 +1,42 @@
+# Django Project Documentation
+
+## Overview
+
+This repository contains documentation about a Django project, guiding users on how to create a Django app, detailing the files it contains, and providing a comprehensive detail of each part of a Django application.
+
+## 1. Technologies Used
+
+- **Backend and Frontend**: Django (with Django templates for frontend rendering)
+- **Database**: PostgreSQL
+- **Authentication**: Django's built-in authentication system
+- **UI Framework**: Bootstrap (for styling)
+- **Database ORM**: Django ORM
+
+## 2. Project Structure
+
+Here is the high-level folder structure for the project:
+
+```bash
+firstProject/
+├── manage.py
+├── firstProject/
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+
+├── home/  # Course-related logic
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   └── templates/
+│
+├── docs/
+│
+├── README.md
+└── .gitignore
+
+```
+
 ## Project root files
 
 When you create a new Django project, it generates a directory with several files and subdirectories.
@@ -18,24 +57,6 @@ When you create a new Django project, it generates a directory with several file
 
 When you run pip freeze > requirements.txt , you're essentially creating a file named requirements.txt that contains a list of all the installed packages and their versions in the current environment. This file can be shared with others, allowing them to replicate your environment by running pip install -r requirements.txt.
 
-## WSGI (Web Server Gateway Interface)
-
-WSGI is designed for synchronous applications. It operates in a blocking, request-response model, which means it handles one request at a time in a linear fashion
-
-Usage: WSGI is widely used in frameworks like Django (before Django 3.0), Flask, and Pyramid. It works well for apps where I/O (like database queries or file reads) is not heavily concurrent.
-Limitations: WSGI struggles with real-time applications like WebSockets or long-polling connections because of its blocking nature.
-
-## ASGI (Asynchronous Server Gateway Interface)
-
-Asynchronous: ASGI is designed to handle both synchronous and asynchronous operations. It can manage long-lived connections and high-concurrency tasks, making it ideal for real-time apps like WebSockets, chat applications, or async API servers.
-
-Usage: ASGI is used by frameworks like Django (3.0+ for async support), FastAPI, and Starlette. It provides support for WebSockets, HTTP2, and other modern protocols.
-Flexibility: ASGI works well for both simple and complex use cases, enabling features like background tasks, WebSocket connections, and event-driven architectures.
-
-### websocket
-
-A WebSocket is a communication protocol that provides full-duplex (two-way) communication between a client (usually a web browser) and a server over a single, long-lived connection. Unlike traditional HTTP, where the client requests data from the server and the server responds once, WebSocket allows both the client and server to send messages to each other at any time.
-
 ## What is a Django App?
 
 A Django app is a self-contained component within a Django project that performs a specific functionality or serves a particular purpose. Apps can be reused across projects and are designed to be modular, making it easier to maintain and extend Django projects.
@@ -49,19 +70,9 @@ django-admin startapp myapp
 
 This command will create a new directory named myapp containing the necessary files and folders for your Django app.
 
-```
-myapp/
-├── __init__.py
-├── admin.py
-├── apps.py
-├── migrations/
-│   └── __init__.py
-├── models.py
-├── tests.py
-└── views.py
-```
-
 Let's take a closer look at each of these files and directories.
+
+## File descriptions
 
 1. **ini**.py
    The **init**.py file is an empty file that tells Python to treat the myapp directory as a Python package. It's not necessary to add any code to this file unless you want to perform additional setup when the app is imported.
@@ -88,262 +99,145 @@ Let's take a closer look at each of these files and directories.
 
 an app is a self-contained module that encapsulates a specific piece of functionality or a related set of features within a larger project. Each app is designed to do one thing and do it well, making it easier to organize and maintain your code. Here are some key points about Django apps:
 
-## Views
-
-a view is a function designed to handle a web request and return a web response. Each view function takes an HTTP Request object as its first parameter named `request`.
-
-## 1. Creating URLS
-
-`./home/views.py`
-In views, we write our entire logic for page handling
-
-```py
-from django.shortcuts import render
-from django.http import HttpResponse
-# Create your views here.
-
-def index(request):
-    return HttpResponse("<h1>Hi, From django</h1>")
-
-def about(request):
-    return HttpResponse("<h2>Hi, from about page</h2>")
-
-def contact(request):
-    return HttpResponse("<h3>Hi, from contact page</h3>")
-```
-
-In `urls` file, we specify based on what path, which functions from views should be triggered.
-
-`./firstProject/urls.py`
-
-```py
-from django.contrib import admin
-from django.urls import path
-from home.views import index, about, contact
-
-urlpatterns = [
-    path("",index,name="index"),
-    path("about/",about,name="about"),
-    path("contact/",contact,name="contact"),
-    path('admin/', admin.site.urls),
-]
-```
-
-But, the real world application does not contain simple texts, we need to return pages with lots of contents withing it.
-
-To have pages, we create a folder `template` in `home` directory and will be creating pages there.
-
-We use `render(request, page)` to render the given page.
-
-render the whole page in `views.py`
-
-```py
-from django.shortcuts import render
-from django.http import HttpResponse
-# Create your views here.
-
-def index(request):
-    return render(request,"index.html")
-
-def about(request):
-    return render(request, "about.html")
-
-def contact(request):
-    return render(request, "contact.html")
-```
-
-## 2. Navigating to different routes
-
-We can use `href` to navigate to different routes.
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>django|home page</title>
-	</head>
-	<body>
-		<nav style="padding: 4rem">
-			<a href="/about">about</a>
-			<a href="/contact">contact</a>
-		</nav>
-		<h1>Welcome to Hooshmandlab</h1>
-	</body>
-</html>
-```
-
-## 3. Dynamic routes
-
-```html
-<html lang="en">
-	<head>
-		<title>django|home page</title>
-	</head>
-	<body>
-		<nav style="padding: 4rem">
-			<a href="{%url 'about'%}">about</a>
-			<a href="{%url 'contact'%}">contact</a>
-		</nav>
-	</body>
-</html>
-```
-
-`<a href="{%url 'about'%}">about</a>`, we are saying that navigate the url based on the name, look for the then name about in urls and navigate to the function or page it rendering.
-`path("about/",about,name="about"),`, name should match with what we write after `url` inside `<a>.`
-
-## 4. Creating Dynamic Path
-
-Creating dynamic URLs in Django involves using URL patterns to capture variable parts of a URL and pass them as parameters to your views.
-
-```py
-from django.contrib import admin
-from django.urls import path
-from home.views import index, about, contact, dynamic_url
-
-urlpatterns = [
-    path("",index,name="index"),
-    path("<id>/", dynamic_url, name="dynamic_url"),
-]
-```
-
-Now,lets pass the id to views and this is a must.
-
-`./home/views.py`
-
-```py
-def dynamic_url(request, id):
-    print(f"this is the id= {id}")
-    return render(request, "dynamic_url.html")
-```
-
-`./home/templates/dynamic_url`
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
-	</head>
-	<body>
-		<nav style="padding: 4rem">
-			<a href="{%url 'contact'%}">contact</a>
-		</nav>
-		<h1>From Dynamic URL</h1>
-	</body>
-</html>
-```
-
-## 5. context
-
-by adding `context` inside render function, we can get access to all the objects that is passed to `context` inside template.
-
-```py
-def dynamic_url(request, id):
-    print(f"this is the id= {id}")
-    return render(request, "dynamic_url.html", context={"id":id, "name":"ahmad"})
-```
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
-	</head>
-	<body>
-		<section style="padding: 4rem">
-			<nav style="padding: 4rem">
-				<a href="{%url 'contact'%}">contact</a>
-			</nav>
-			<h1>From Dynamic URL</h1>
-			<h1>hello {{name}}</h1>
-			<h1>id: {{id}}</h1>
-		</section>
-	</body>
-</html>
-```
-
-We can pass more than one parameter
-
-```py
-path("<id>/<name>/", dynamic_url, name="dynamic_url"),
-def dynamic_url(request, id, name):
-   print(f"this is the id= {id}")
-   return render(request, "dynamic_url.html", context={"id":id, "name":name})
-
-```
-
-When we are navigating to these dynamic url, we have to pass the params we add in path, otherwise it will not work.
-
-## 6. class based views vs function based views
-
-### 1. function based
-
-Function-Based Views in Django are Python functions that take a request and return a response. They are simple and easy to understand for small, straightforward views.
-
-#### Pros:
-
-Simplicity: Easy to understand, especially for small views.
-Explicitness: Everything is laid out in a single function, making it easier to follow what is happening.
-Flexibility: You can customize the request/response cycle freely without the need for class inheritance.
-
-#### Cons:
-
-Repetitive Code: For views that share logic (e.g., CRUD operations), you may end up writing repetitive code.
-Limited Scalability: When the view becomes more complex, the function can grow large and become harder to manage.
-
-```py
-from django.http import HttpResponse
-
-def my_view(request):
-    return HttpResponse("Hello, world!")
-
-```
-
-### 2. class based views
-
-Class-Based Views (CBVs)
-Class-Based Views in Django are views organized as Python classes. They provide more structure and built-in functionality, allowing for code reuse and the use of object-oriented patterns.
-
-#### Pros:
-
-Reusability: You can create reusable and modular components by extending Django's generic views.
-Readability: Logic can be broken down into methods (e.g., get(), post(), delete()), making it easier to organize code, especially for complex views.
-Inheritance: You can take advantage of object-oriented programming (OOP), using inheritance to extend or modify existing views.
-Built-in Generic Views: Django provides many built-in class-based views for common tasks like listing, creating, updating, and deleting objects (CRUD operations).
-
-#### cons
-
-Complexity: Initially more difficult to understand, especially for beginners.
-Less Explicit: Some logic might be hidden in the class hierarchy, which may require diving into Django's documentation or source code to fully grasp what's happening.
-
-```py
-from django.http import HttpResponse
-from django.views import View
-
-class MyView(View):
-    def get(self, request):
-        return HttpResponse("Hello, world!")
-
-```
-
-## From Project
-
-Without Quotes `(let secret = {{ secret_number }}`;):
-
-Use this when secret_number is guaranteed to always be an integer.
-It's a direct injection of the number.
-With Quotes and parseInt() (let secret = `parseInt("{{ secret_number }}");)`:
-
-Use this when secret_number might be empty, None, or a string representation of a number.
-It's safer because it ensures the value is converted into a number, or NaN if invalid.
+### Setup for the project
 
 ```sh
-# To remove files from staged area
-git rm -r --cached .
+# install python and pip using Homebrew
+brew install python
+
+# install virtualenv using pip
+python3 -m pip install virtualenv
+
+# make a main directory
+mkdir directory_name
+cd directory_name
+
+# create a new virtual environment
+virtualenv env
+
+# activate virtual environment (macOS)
+source env/bin/activate
+
+# add .gitignore and requirements.txt
+touch .gitignore
+touch requirements.txt
+
+# install Django in the virtual environment
+pip install django
+pip install python-dotenv
+
+# check if Django is installed
+django-admin --version
+#
+pip install -r requirements.txt
+# create a new Django project (corrected command)
+django-admin startproject project_name
+
+# go to the project directory
+cd project_name
+
+# create an app inside the project
+django-admin startapp appname
+# or
+python manage.py startapp appname
+
+# start the development server
+python manage.py runserver
 ```
+
+## Reading Documents
+
+[view](./documents/view/VIEW.MD)
+[url](./documents/url/URL.md)
+[template](./documents/tempalte/TEMPLATE.MD)
+[model](./documents/model/MODEL.MD)
+[model schema](./documents/model/MODELSCHEMA.MD)
+[relationships](./documents/model/RELATIONSHIPS.MD)
+[save_methods in models](./documents/model/SAVEMETHOD.md)
+[bulk creation](./documents/utils/BULK_METACLASS.MD)
+[forms](./documents/form/FORMS.MD)
+
+## servers
+
+servers are computers that runs applications and services.
+It provides service to the use and another computer.
+They are stored in data centers, all of the servers are connected to the internet and running different applications.
+
+Data centers are built based on the service purpose, for instance if it provides more content like images and videos, it will have more hard drive space.
+these devices are called ` hardware` and the piece of code that run on them are known as `software`.
+
+## web server
+
+a web server commonly do the following tasks.
+
+- website storage and administration
+- data storage
+- security
+- managing emails
+- responding ot web requests from the client
+
+## webpage
+
+a webpage is a document that displays image, videos, text and various content, it is a single page.
+
+## website
+
+a website is collection of webpages that are linked together.
+
+## web application
+
+web applications are more interactive where websites are more informative like `wikipedia`.
+
+## page rendering
+
+when the server sends the page content, the process of reading the code and creating the page on the screen is known page rendering.
+
+## browser
+
+It is a software that allows us to browse on world wide web.
+
+## HTTP
+
+a protocol that is used between the client(user) and the server.
+it is used to transfer web resources like images, HTML, videos and so on.
+
+## Library
+
+A library supplies reusable pieces of code that we can use in our application instead of having to re-create the required code.
+they are built for a specific purpose.
+For instance a library for validating the emails.
+
+## Framework
+
+Frameworks provides the blueprint or structure to work with.
+It defines flow and control of our application.
+
+#### Advantages
+
+- time saving
+- structure
+- best practices
+
+in frameworks, we are having more freedom.
+
+## API
+
+application program interfaces that allows us to interact with an application.
+
+## WSGI (Web Server Gateway Interface)
+
+WSGI is designed for synchronous applications. It operates in a blocking, request-response model, which means it handles one request at a time in a linear fashion
+
+Usage: WSGI is widely used in frameworks like Django (before Django 3.0), Flask, and Pyramid. It works well for apps where I/O (like database queries or file reads) is not heavily concurrent.
+Limitations: WSGI struggles with real-time applications like WebSockets or long-polling connections because of its blocking nature.
+
+## ASGI (Asynchronous Server Gateway Interface)
+
+Asynchronous: ASGI is designed to handle both synchronous and asynchronous operations. It can manage long-lived connections and high-concurrency tasks, making it ideal for real-time apps like WebSockets, chat applications, or async API servers.
+
+Usage: ASGI is used by frameworks like Django (3.0+ for async support), FastAPI, and Starlette. It provides support for WebSockets, HTTP2, and other modern protocols.
+Flexibility: ASGI works well for both simple and complex use cases, enabling features like background tasks, WebSocket connections, and event-driven architectures.
+
+### websocket
+
+A WebSocket is a communication protocol that provides full-duplex (two-way) communication between a client (usually a web browser) and a server over a single, long-lived connection. Unlike traditional HTTP, where the client requests data from the server and the server responds once, WebSocket allows both the client and server to send messages to each other at any time.
