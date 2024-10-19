@@ -27,6 +27,7 @@ A model is a class that defines the structure of a database table, including fie
 ### Purpose:
 
 Models are used to define the schema of our database in Python code, allowing us to perform operations like creating, reading, updating, and deleting records (known as CRUD operations) without writing raw SQL.
+
 It provides an abstraction layer, allowing us to focus on the logic of the application rather than the intricacies of database queries.
 
 ### Database Interaction:

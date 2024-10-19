@@ -147,15 +147,15 @@ python manage.py runserver
 
 ## Reading Documents
 
-[view](./documents/view/VIEW.MD)
-[url](./documents/url/URL.md)
-[template](./documents/tempalte/TEMPLATE.MD)
-[model](./documents/model/MODEL.MD)
-[model schema](./documents/model/MODELSCHEMA.MD)
-[relationships](./documents/model/RELATIONSHIPS.MD)
-[save_methods in models](./documents/model/SAVEMETHOD.md)
-[bulk creation](./documents/utils/BULK_METACLASS.MD)
-[forms](./documents/form/FORMS.MD)
+- [view](./firstProject/documents/view/VIEW.MD)
+- [url](./firstProject/documents/url/URL.md)
+- [template](./firstProject/documents/tempalte/TEMPLATE.MD)
+- [model](./firstProject/documents/model/MODEL.MD)
+- [model schema](./firstProject/documents/model/MODELSCHEMA.MD)
+- [relationships](./firstProject/documents/model/RELATIONSHIPS.MD)
+- [save_methods in models](./firstProject/documents/model/SAVEMETHOD.md)
+- [bulk creation](./firstProject/documents/utils/BULK_METACLASS.MD)
+- [forms](./firstProject/documents/form/FORMS.MD)
 
 ## servers
 
