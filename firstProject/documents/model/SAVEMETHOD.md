@@ -43,10 +43,10 @@ product.save(force_insert=True, update_fields=['slug'])
 
 ### Flow of Execution:
 
-Step 1: When we call product.save(), the custom save() method of we Product class is invoked.
-Step 2: Inside we custom method, the slug is generated.
-Step 3: The custom method then calls super(Product, self).save(\*args, \*\*kwargs), which invokes Django's default save() method.
-Step 4: Django’s save() method takes care of the actual database operations (insertion or updating of the record).
+- Step 1: When we call product.save(), the custom save() method of we Product class is invoked.
+- Step 2: Inside we custom method, the slug is generated.
+- Step 3: The custom method then calls super(Product, self).save(\*args, \*\*kwargs), which invokes Django's default save() method.
+- Step 4: Django’s save() method takes care of the actual database operations (insertion or updating of the record).
 
 ## The two calls are sequential:
 
