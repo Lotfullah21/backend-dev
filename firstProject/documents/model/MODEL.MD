@@ -56,10 +56,10 @@ A model helps us to `CREATE, READ, UPDATE, AND DELETE` objects.
 
 ## Key Features Inherited by Subclassing:
 
-`Field`: we can define various types of fields (e.g., CharField, IntegerField, DateTimeField) as attributes of the class.
-`Meta Options`: we can use an inner Meta class to provide additional options such as ordering or the database table name.
-`Methods`: Models have methods like s`ave(), delete(), and get_absolute_url()` that allow us to manage and retrieve records.
-`QuerySets`: Django provides methods like .`filter(), .all(), and .exclude()` to fetch data from the database.
+- `Field`: we can define various types of fields (e.g., CharField, IntegerField, DateTimeField) as attributes of the class.
+- `Meta Options`: we can use an inner Meta class to provide additional options such as ordering or the database table name.
+- `Methods`: Models have methods like s`ave(), delete(), and get_absolute_url()` that allow us to manage and retrieve records.
+- `QuerySets`: Django provides methods like .`filter(), .all(), and .exclude()` to fetch data from the database.
 
 ## How Models Work
 
