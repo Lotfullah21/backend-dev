@@ -22,7 +22,7 @@ def contact(request):
     return HttpResponse("<h3>Hi, from contact page</h3>")
 ```
 
-In `urls` file, we specify based on what path, which functions from views should be triggered.
+In `urls` file, we specify based on which path, which functions from views should be triggered.
 
 `./firstProject/urls.py`
 
