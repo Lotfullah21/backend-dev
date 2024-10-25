@@ -1,4 +1,4 @@
-## save Method:
+## save method:
 
 ```py
 from django.db import models
@@ -30,12 +30,12 @@ Then, the object is saved with this slug in the database.
 `*args`:
 
 Stands for "arguments" and is used to pass a variable number of non-keyword arguments to a function or method.
-In we save method, it's used to allow flexibility so that the method can accept any number of positional arguments.
+save method, it's used to allow flexibility so that the method can accept any number of positional arguments.
 If there were any extra positional arguments passed to the save() method when it's called, *args would capture them, allowing us to forward them to the parent class's save() method. However, in this particular case, we aren't explicitly using *args.
 
 `**kwargs`
 Stands for "keyword arguments" and is used to capture a variable number of keyword arguments (arguments passed by name) in the form of a dictionary.
-In we save method, it ensures that any extra keyword arguments passed when calling the save() method are captured and forwarded to the parent class's save() method
+save method, ensures that any extra keyword arguments passed when calling the save() method are captured and forwarded to the parent class's save() method
 
 ```py
 product.save(force_insert=True, update_fields=['slug'])
@@ -50,5 +50,5 @@ product.save(force_insert=True, update_fields=['slug'])
 
 ## The two calls are sequential:
 
-we custom save() does some work (slug generation).
+custom save() does some work (slug generation).
 It then calls super(), which invokes the parent save() method, which completes the actual saving to the database
