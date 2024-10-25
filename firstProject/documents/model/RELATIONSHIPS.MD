@@ -1,4 +1,4 @@
-## `Many-To-One` or `One-To-Many`. ForeignKey
+## `Many-To-One` or `One-To-Many` (ForeignKey)
 
 a primary key of one table that can be used in another table is known as foreign key.
 ForeignKey represents a many-to-one relationship, where multiple instances of one model (child) can be associated with a single instance of another model (parent). In this case, the Student model contains a ForeignKey field pointing to the Department model, This means:
