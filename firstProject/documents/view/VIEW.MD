@@ -198,14 +198,14 @@ Function-Based Views in Django are Python functions that take a request and retu
 
 #### Pros:
 
-Simplicity: Easy to understand, especially for small views.
-Explicitness: Everything is laid out in a single function, making it easier to follow what is happening.
-Flexibility: You can customize the request/response cycle freely without the need for class inheritance.
+- Simplicity: Easy to understand, especially for small views.
+- Explicitness: Everything is laid out in a single function, making it easier to follow what is happening.
+- Flexibility: You can customize the request/response cycle freely without the need for class inheritance.
 
 #### Cons:
 
-Repetitive Code: For views that share logic (e.g., CRUD operations), you may end up writing repetitive code.
-Limited Scalability: When the view becomes more complex, the function can grow large and become harder to manage.
+- Repetitive Code: For views that share logic (e.g., CRUD operations), you may end up writing repetitive code.
+- Limited Scalability: When the view becomes more complex, the function can grow large and become harder to manage.
 
 ```py
 from django.http import HttpResponse
@@ -222,15 +222,15 @@ Class-Based Views in Django are views organized as Python classes. They provide 
 
 #### Pros:
 
-Reusability: You can create reusable and modular components by extending Django's generic views.
-Readability: Logic can be broken down into methods (e.g., get(), post(), delete()), making it easier to organize code, especially for complex views.
-Inheritance: You can take advantage of object-oriented programming (OOP), using inheritance to extend or modify existing views.
-Built-in Generic Views: Django provides many built-in class-based views for common tasks like listing, creating, updating, and deleting objects (CRUD operations).
+- Reusability: You can create reusable and modular components by extending Django's generic views.
+- Readability: Logic can be broken down into methods (e.g., get(), post(), delete()), making it easier to organize code, especially for complex views.
+- Inheritance: You can take advantage of object-oriented programming (OOP), using inheritance to extend or modify existing views.
+- Built-in Generic Views: Django provides many built-in class-based views for common tasks like listing, creating, updating, and deleting objects (CRUD operations).
 
 #### cons
 
-Complexity: Initially more difficult to understand, especially for beginners.
-Less Explicit: Some logic might be hidden in the class hierarchy, which may require diving into Django's documentation or source code to fully grasp what's happening.
+- Complexity: Initially more difficult to understand, especially for beginners.
+- Less Explicit: Some logic might be hidden in the class hierarchy, which may require diving into Django's documentation or source code to fully grasp what's happening.
 
 ```py
 from django.http import HttpResponse
