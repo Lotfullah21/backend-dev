@@ -49,10 +49,10 @@ query parameters for optional filters or settings and path parameters for identi
 
 ## Client error responses
 
-`400`: It represents a bad request, some of the params might not match what the server expects.
-`401`: For authentication, the use must logged in to be able make a request.
-`403`: Request is successful, but the user does not have required permission.
-`404`: The resource cannot be located at the specified path.
+- `400`: It represents a bad request, some of the params might not match what the server expects.
+- `401`: For authentication, the use must logged in to be able make a request.
+- `403`: Request is successful, but the user does not have required permission.
+- `404`: The resource cannot be located at the specified path.
 
 ## Server error responses
 
