@@ -6,16 +6,16 @@ This repository contains documentation about a Django project, guiding users on 
 
 ## Related Documents
 
-[django](./firstProject/documents/intro-django/README.md)
-[server](./firstProject/documents/server/README.md)
-[database](./firstProject/documents/database/README.md)
-[model](./firstProject/documents/model/README.md)
-[model-relationships](./firstProject/documents/model/RELATIONSHIPS.md)
-[model-schema](./firstProject/documents/model/MODELSCHEMA.md)
-[save-method](./firstProject/documents/model/SAVEMETHOD.md)
-[template](./firstProject/documents/tempalte/README.md)
-[views](./firstProject/documents/view/README.md)
-[url](./firstProject/documents/url/README.md)
+- [django](./firstProject/documents/intro-django/README.md)
+- [server](./firstProject/documents/server/README.md)
+- [database](./firstProject/documents/database/README.md)
+- [model](./firstProject/documents/model/README.md)
+- [model-relationships](./firstProject/documents/model/RELATIONSHIPS.md)
+- [model-schema](./firstProject/documents/model/MODELSCHEMA.md)
+- [save-method](./firstProject/documents/model/SAVEMETHOD.md)
+- [template](./firstProject/documents/tempalte/README.md)
+- [views](./firstProject/documents/view/README.md)
+- [url](./firstProject/documents/url/README.md)
 
 ## 1. Technologies Used
 
