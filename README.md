@@ -16,6 +16,7 @@ This repository contains documentation about a Django project, guiding users on 
 - [template](./firstProject/documents/tempalte/README.md)
 - [views](./firstProject/documents/view/README.md)
 - [url](./firstProject/documents/url/README.md)
+- [architecture](./firstProject/architecture/README.md)
 
 ## 1. Technologies Used
 

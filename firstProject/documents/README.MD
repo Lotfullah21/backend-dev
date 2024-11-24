@@ -10,6 +10,7 @@
 - [template](./tempalte/README.md)
 - [views](./view/README.md)
 - [url](./url/README.md)
+- [architecture](./architecture/README.md)
 
 ## Object Relational Mapping (ORM)
 

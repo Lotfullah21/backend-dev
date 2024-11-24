@@ -52,6 +52,7 @@ For instance a library for validating the emails.
 
 Frameworks provides the blueprint or structure to work with.
 It defines flow and control of our application.
+they provide a solid foundation to build upon, just like a house foundation.
 
 #### Advantages
 
@@ -60,6 +61,13 @@ It defines flow and control of our application.
 - best practices
 
 in frameworks, we are having more freedom.
+
+## Web Framework
+
+A software framework, in general, is a standard, reusable software platform that facilitates the rapid development of software applications.
+
+The web framework (also called web application framework) provides a generic functionality needed for building web applications, APIs and web services.
+For example, you can easily connect your application to databases. Usually, the framework handles tasks such as session management much more efficiently.
 
 ## API
 

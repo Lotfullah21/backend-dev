@@ -38,4 +38,27 @@ Let's take a closer look at each of these files and directories.
 
 ## app
 
-an app is a self-contained module that encapsulates a specific piece of functionality or a related set of features within a larger project. Each app is designed to do one thing and do it well, making it easier to organize and maintain your code. Here are some key points about Django apps:
+an app is a self-contained module that encapsulates a specific piece of functionality or a related set of features within a larger project. Each app is designed to do one thing and do it well, making it easier to organize and maintain your code.
+they do not depend on other apps to work
+
+```sh
+django-admin startapp users
+or
+python manage.py startapp <name of app>
+```
+
+## project
+
+A Django project is a Python package containing the database configuration used by various sub-modules (Django calls them apps) and other Django-specific settings.
+
+```sh
+django-admin startproject demoproject
+```
+
+## runserver
+
+This command starts Django’s built-in development server on the local machine with IP address 127.0.0.1 and port 8000.
+
+```sh
+python manage.py runserver
+```
