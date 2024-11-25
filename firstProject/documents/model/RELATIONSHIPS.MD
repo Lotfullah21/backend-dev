@@ -8,10 +8,12 @@ ForeignKey represents a many-to-one relationship, where multiple instances of on
 - But one department can have multiple students.
 - The on_delete=models.CASCADE argument ensures that if a department is deleted, all students associated with that department are also deleted to maintain referential integrity.
 
-from relationship point of view, it can men `Many-To-One` or `One-To-Many`.
+from relationship point of view, it can mean `Many-To-One` or `One-To-Many`.
 For instance, if there is a department with a primary key and many students whom are studying in the same department.
 
 Now, we can use primary key of `department` as foreign key in student model to create a one to many relationship.
+
+<img src="./assets/model.png" height="456" width="1192" alt="model description">
 
 ```py
 class Department(models.Model):
@@ -22,36 +24,35 @@ class Department(models.Model):
 class Student(models.Model):
     department = models.ForeignKey(Department,models.CASCADE, models.SET_DEFAULT, models.SET_NULL, models.PROTECT)
     name=models.CharField(max_length=100)
-    gender = models.CharField(max_length=10,choices=(("Male",),("Female")), default="Male")
-```
-
-```py
-class Student(models.Model):
-    department = models.ForeignKey(Department,models.CASCADE, models.SET_DEFAULT, models.SET_NULL, models.PROTECT)
 ```
 
 1. `model.CASCADE`: when `Department` model is deleted, our entire child model (`Student`) model is also deleted.
 
 ```py
-department = models.ForeignKey(Department, on_delete=models.CASCADE)
+class Student(models.Model):
+    department = models.ForeignKey(Department,on_delete=models.CASCADE)
+    name=models.CharField(max_length=100)
 ```
 
 2. `models.SET_NULL`: when `Department` model is deleted, set the value of `Department` in (`Student`) model as Null, This requires that the foreign key field in the Student model is set to null=True.
 
 ```py
-department = models.ForeignKey(Department, on_delete=models.CASCADE)
+class Student(models.Model):
+    department = models.ForeignKey(Department, on_delete=models.SET_NULL)
 ```
 
 3. `models.SET_DEFAULT`: when `Department` model is deleted, set the value of `Department` in (`Student`) model as default value we have specified for `Department` in `Student` model.
 
 ```py
-department = models.ForeignKey(Department, on_delete=models.SET_DEFAULT, default=1)  # Assuming a default Department ID
+class Student(models.Model):
+    department = models.ForeignKey(Department, on_delete=models.SET_DEFAULT,default=1)
 ```
 
-4. `models.PROTECT`: protect the model, first discontinue the `Department` model, then delete it.
+4. `models.PROTECT`: protect the model, first discontinue the `Department` model, then delete it, we cannot delete the student instance unless we remove the department first.
 
 ```py
-department = models.ForeignKey(Department, on_delete=models.PROTECT)
+class Student(models.Model):
+    department = models.ForeignKey(Department, on_delete=models.PROTECT,default=1)
 ```
 
 This framework for using foreign keys in Django is essential for modeling real-world relationships in our database effectively

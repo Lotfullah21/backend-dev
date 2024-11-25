@@ -36,6 +36,26 @@ Let's take a closer look at each of these files and directories.
 7. views.py
    The views.py file contains the view functions or classes that handle HTTP requests and return HTTP responses. Views are the heart of a Django app and define the logic for rendering templates, processing form submissions, and interacting with models.
 
+## Project root files
+
+When you create a new Django project, it generates a directory with several files and subdirectories.
+
+`Manage.py`: A command-line utility for managing various aspects of the project, such as running the development server, applying migrations, and creating new apps.
+
+`<project-name>`: This directory carries the name you provided when you created the project. Inside, you'll find:
+
+`(a) 'settings.py'`: This file holds the project's configuration settings, including database configurations, installed apps, middleware, and more.
+
+`(b) 'urls.py'`: The urls.py files define the URL patterns and their corresponding views. These patterns determine which view should be called when a particular URL is accessed.
+
+`(c) 'wsgi.py' and 'asgi.py':` This file is used for deploying the Django project on a WSGI server and ASGI server respectively.
+
+`(d) **init**.py:`` An empty file indicating that the directory should be treated as a Python package.
+
+`requirements.txt`
+
+When you run pip freeze > requirements.txt , you're essentially creating a file named requirements.txt that contains a list of all the installed packages and their versions in the current environment. This file can be shared with others, allowing them to replicate your environment by running pip install -r requirements.txt.
+
 ## app
 
 an app is a self-contained module that encapsulates a specific piece of functionality or a related set of features within a larger project. Each app is designed to do one thing and do it well, making it easier to organize and maintain your code.

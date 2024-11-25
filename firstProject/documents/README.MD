@@ -1,9 +1,10 @@
 ## Resources``
 
-- [django](/intro-django/README.md)
-- [server](/server/README.md)
+- [django](./intro-django/README.md)
+- [server](./server/README.md)
 - [database](./database/README.md)
 - [model](./model/README.md)
+- [ORM](./model/ORM.md)
 - [model-relationships](./model/RELATIONSHIPS.md)
 - [model-schema](./model/MODELSCHEMA.md)
 - [save-method](./model/SAVEMETHOD.md)

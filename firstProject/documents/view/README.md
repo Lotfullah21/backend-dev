@@ -1,6 +1,8 @@
 ## Views
 
-a view is a function designed to handle a web request and return a web response. Each view function takes an HTTP Request object as its first parameter named `request`.
+a view is a function designed to handle a web request and return a web response. Each view function takes an HTTP Request object as its first parameter named `request.`
+
+We create the logic inside the views to present the data to the end user.
 
 ## 1. Creating URLS
 

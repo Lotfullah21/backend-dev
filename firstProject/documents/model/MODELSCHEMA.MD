@@ -1,3 +1,12 @@
+## schema
+
+a schema is a blueprint or structure that defines how data is organized and how the relationships among different entities are managed within a database.
+
+A schema
+
+- specifies the tables in a database, fields in table
+- determines the relationship between the tables, one-to-many, one-to-one, many-to-many
+
 ```py
 from django.db import models
 
@@ -31,7 +40,7 @@ Lets go through each of the fields.
 4. `default`: if not value is provided, the default value will be saved.
 
 ```py
-gender = models.CharField(max_length=10, choices=(("Male", "Male"), ("Female", "Female")), default="Male")
+gender = models.CharField(max_length=10, choices=(("male", "Male"), ("female", "Female")), default="Male")
 ```
 
 5. `null=True`: This allows the field to be NULL in the database, meaning it can be empty.
