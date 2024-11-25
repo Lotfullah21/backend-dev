@@ -13,7 +13,7 @@ For instance, if there is a department with a primary key and many students whom
 
 Now, we can use primary key of `department` as foreign key in student model to create a one to many relationship.
 
-<img src="./assets/one-to-many.png" height="576" width="1192" alt="model description">
+<img src="./assets/one-to-many.png" height="476" width="1192" alt="model description">
 
 ```py
 class Department(models.Model):
