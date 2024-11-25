@@ -76,7 +76,7 @@ class User(models.Model):
     last_name = models.CharField(max_length:90)
 ```
 
-<img src="./assets/model.png" height="756" width="1192" alt="model description">
+<img src="./assets/model.png" height="656" width="1192" alt="model description">
 
 #### 2.Attributes as Fields:
 
