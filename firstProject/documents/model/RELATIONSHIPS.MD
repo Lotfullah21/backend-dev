@@ -8,12 +8,12 @@ ForeignKey represents a many-to-one relationship, where multiple instances of on
 - But one department can have multiple students.
 - The on_delete=models.CASCADE argument ensures that if a department is deleted, all students associated with that department are also deleted to maintain referential integrity.
 
+<img src="./assets/one-to-many.png" height="476" width="1192" alt="model description">
+
 from relationship point of view, it can mean `Many-To-One` or `One-To-Many`.
 For instance, if there is a department with a primary key and many students whom are studying in the same department.
 
 Now, we can use primary key of `department` as foreign key in student model to create a one to many relationship.
-
-<img src="./assets/one-to-many.png" height="476" width="1192" alt="model description">
 
 ```py
 class Department(models.Model):
@@ -59,14 +59,14 @@ This framework for using foreign keys in Django is essential for modeling real-w
 
 ## OneToOne
 
-each record in one model corresponds to exactly one record in another model
-all properties are the same, except the fact that here, we can have only one student per one department model.
+Each record in one model corresponds to exactly one record in another model.
+all properties are same is one-to-many, except the fact that here, we can have only one student per one department model.
 
 - Suppose we have, the Student model containing a field named department, which is a OneToOneField pointing to the Department model.
 - This relationship indicates that each student is associated with exactly one department, and conversely, each department has exactly one student.
 - Similar to the ForeignKey relationship, the on_delete=models.CASCADE argument ensures that if a department or a student is deleted, the associated instance will also be deleted to maintain referential integrity.
 
-For instance, an `EEE` department can have only one student.
+For instance, `Computer science` department can have only one student.
 the `on_delete` property is the same as `Foreign key`.
 
 ```py
@@ -84,6 +84,13 @@ a ManyToManyField is used to create a many-to-many relationship between two mode
 
 Let's say we have a Student model and a Course model, where students can enroll in multiple courses, and each course can have multiple students
 
+### What is related_name?
+
+When you create a ForeignKey in Django, it automatically sets up two relationships:
+
+` Forward Relationship`: From the child model (e.g., Student) to the parent model (e.g., Course).
+`Reverse Relationship`: From the parent model (e.g., Course) to the child model (e.g., Student).
+
 ```py
 from django.db import models
 
@@ -93,12 +100,58 @@ class Course(models.Model):
 
 class Student(models.Model):
     name = models.CharField(max_length=100)
-    courses = models.ManyToManyField(Course, related_name='students')  # Establishing many-to-many relationship
+    # establishing many-to-many relationship
+    courses = models.ManyToManyField(Course, related_name='students')
 
     def __str__(self):
         return self.name
 
 ```
+
+## Forward and Reverse Relationships
+
+#### Forward Relationship
+
+You can access the CourseCategory from a Course object directly:
+
+```py
+course = Course.objects.first()
+  # this gives the related CourseCategory object
+print(student.courses)
+
+```
+
+#### Reverse Relationship
+
+The `related_name="students"` allows you to access all courses related to a category:
+
+```py
+course = Course.objects.first()
+ # this fetches all Course objects linked to this category
+print(category.courses.all())
+
+```
+
+#### Without related_name
+
+If you don’t set related_name, Django uses a default name for the reverse relationship. By default, it adds \_set to the lowercase child model name.
+
+```py
+class Student(models.Model):
+    courses = models.ForeignKey(CourseCategory, on_delete=models.CASCADE)
+
+```
+
+```py
+course = Course.objects.first()
+ # default reverse relationship name
+print(course.student_set.all())
+
+```
+
+related_name customizes how you access related objects in the reverse direction (parent → child).
+
+<img src="./assets/many-to-many.png" height="476" width="1192" alt="model description">
 
 ManyToManyField and default: we cannot set a default for ManyToManyField because it represents a relationship that can involve multiple records, and Django requires it to be set explicitly after the object is created
 
@@ -108,27 +161,14 @@ The related_name argument allows you to access all students enrolled in a partic
 ### Creating Instances
 
 ```py
-# Creating course instances
-course1 = Course.objects.create(name='Mathematics', description='An advanced math course.')
-course2 = Course.objects.create(name='Physics', description='An introductory physics course.')
-
-# Creating a student instance
-student = Student.objects.create(name='Alice')
-
-# Enrolling the student in courses
-student.courses.add(course1, course2)
-
-# To check the courses a student is enrolled in
-enrolled_courses = student.courses.all()
-
-# To check students in a specific course
-students_in_math = course1.students.all()
+22
 
 ```
 
-Using `.add()` is essential for managing many-to-many relationships in Django
-Use `create()` when you want to quickly create and save a new instance without additional processing, but it is not capable of updating.
-Use `save()` when you need to perform additional operations on the instance before saving or when updating an existing instance.
+- Using `.add()` is essential for managing many-to-many relationships in Django
+- Use `create()` when you want to quickly create and save a new instance without additional processing, but it is not capable of updating.
+- Use `save()` when you need to perform additional operations on the instance before saving or when updating an existing instance.
+
 If you are using other models inside other modes, make sure to create other models first, then the one using those models, otherwise, it will create null ids for those.
 We can insert and create an instance to the database using `save()`.
 

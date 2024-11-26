@@ -12,6 +12,7 @@
 - [ORM](./documents/model/ORM.md)
 - [model-relationships](./documents/model/RELATIONSHIPS.md)
 - [model-schema](./documents/model/MODELSCHEMA.md)
+- [related_name](./documents/model/RLEATED_NAME.md)
 - [save-method](./documents/model/SAVEMETHOD.md)
 - [template](./documents/tempalte/README.md)
 
