@@ -15,10 +15,12 @@ This repository contains documentation about a Django project, guiding users on 
 - [model-relationships](./firstProject/documents/model/RELATIONSHIPS.md)
 - [model-schema](./firstProject/documents/model/MODELSCHEMA.md)
 - [related_name](./firstProject/documents/model/RLEATED_NAME.md)
-- [migrations](./firstProject/documents/model/MIGRATIONS.MD)
+- [migrations](./firstProject/documents/model/MIGRATIONS.md)
 - [save-method](./firstProject/documents/model/SAVEMETHOD.md)
 - [architecture](./firstProject/documents/architecture/README.md)
 - [template](./firstProject/documents/tempalte/README.md)
+
+firstProject/documents/model/RELATIONSHIPS.md
 
 ## 1. Technologies Used
 
